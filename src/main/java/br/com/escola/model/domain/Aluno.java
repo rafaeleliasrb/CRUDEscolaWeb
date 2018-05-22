@@ -25,7 +25,8 @@ public class Aluno implements Serializable {
 
 	private String telefone;
 
-	private String curso;
+	@Column(name = "idCurso")
+	private Curso curso = new Curso();
 	
 	private int idade;
 	
@@ -72,11 +73,11 @@ public class Aluno implements Serializable {
 		this.telefone = telefone;
 	}
 
-	public String getCurso() {
+	public Curso getCurso() {
 		return curso;
 	}
 
-	public void setCurso(String curso) {
+	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
 

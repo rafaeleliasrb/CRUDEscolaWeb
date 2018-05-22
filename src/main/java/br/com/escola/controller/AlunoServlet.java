@@ -80,7 +80,7 @@ public class AlunoServlet extends HttpServlet {
 			aluno.setNome(request.getParameter("nome"));
 			aluno.setEmail(request.getParameter("email"));
 			aluno.setTelefone(request.getParameter("telefone"));
-			aluno.setCurso(request.getParameter("curso"));
+			//aluno.setCurso(request.getParameter("curso"));
 			aluno.setIdade(Integer.parseInt(request.getParameter("idade")));
 			aluno.setMatriculado(Boolean.parseBoolean(request.getParameter("matriculado")));
 			aluno.setNota(Float.parseFloat(request.getParameter("nota")));
