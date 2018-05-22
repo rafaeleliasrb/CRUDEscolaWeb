@@ -24,6 +24,11 @@ public class CadastrarAlunoBean {
 		aluno = new Aluno();
 	}
 
+	public void adicionarCurso() {
+		Curso curso = cursoService.buscar(idCurso);
+		aluno.adicionarCurso(curso);
+	}
+	
 	public Aluno getAluno() {
 		return aluno;
 	}

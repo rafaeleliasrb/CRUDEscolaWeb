@@ -12,4 +12,8 @@ public class CursoService {
 	public List<Curso> listar() {
 		return this.dao.listar();
 	}
+	
+	public Curso buscar(int id) {
+		return this.dao.buscar(id);
+	}
 }

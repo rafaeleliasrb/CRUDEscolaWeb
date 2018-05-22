@@ -1,12 +1,15 @@
 package br.com.escola.model.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -25,8 +28,9 @@ public class Aluno implements Serializable {
 
 	private String telefone;
 
+	@ManyToMany
 	@Column(name = "idCurso")
-	private Curso curso = new Curso();
+	private List<Curso> cursos = new ArrayList<>();
 	
 	private int idade;
 	
@@ -73,12 +77,12 @@ public class Aluno implements Serializable {
 		this.telefone = telefone;
 	}
 
-	public Curso getCurso() {
-		return curso;
+	public List<Curso> getCursos() {
+		return cursos;
 	}
 
-	public void setCurso(Curso curso) {
-		this.curso = curso;
+	public void adicionarCurso(Curso curso) {
+		cursos.add(curso);
 	}
 
 	public int getIdade() {
@@ -105,8 +109,4 @@ public class Aluno implements Serializable {
 		this.isMatriculado = isMatriculado;
 	}
 	
-	@Override
-	public String toString() {
-		return "Nome: " + nome + ", Email: " + email + ", Telefone: " + telefone + ", Idade: " + idade + ", Curso: " + curso;
-	}
 }

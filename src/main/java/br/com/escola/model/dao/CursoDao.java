@@ -21,4 +21,8 @@ public class CursoDao {
 		        .createQuery("select t from Curso as t")
 		        .getResultList();
 	}
+	
+	public Curso buscar(int idParam) {
+		return this.em.find(Curso.class, idParam);
+	}
 }

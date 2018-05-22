@@ -25,17 +25,24 @@
 				<h:outputLabel value="Email" for="email"/>
 				<h:inputText id="email" value="#{cadastrarAlunoBean.aluno.email}"/>
 				
-				<h:outputLabel value="Curso" for="curso"/>
-				<h:selectOneMenu id="curso" value="#{cadastrarAlunoBean.idCurso}">
-					<f:selectItems value="#{cadastrarAlunoBean.cursos}" var="curso" 
-						itemLabel="#{curso.nome}" itemValue="#{curso.id}"/>
-				</h:selectOneMenu>
 				
 				<h:outputLabel value="Nota" for="nota"/>
 				<h:inputText id="nota" value="#{cadastrarAlunoBean.aluno.nota}"/>
 			</h:panelGrid>
 		</fieldset>
-			<h:commandButton value="Salvar" action="#{cadastrarAlunoBean.salvar}"/>
+		
+		<fieldset>
+			<legend>Adicionar curso</legend>
+			<h:outputLabel value="Curso" for="curso"/>
+			<h:selectOneMenu id="curso" value="#{cadastrarAlunoBean.idCurso}">
+				<f:selectItems value="#{cadastrarAlunoBean.cursos}" var="curso" 
+					itemLabel="#{curso.nome}" itemValue="#{curso.id}"/>
+			</h:selectOneMenu>
+			
+			<h:commandButton value="Salvar" action="#{cadastrarAlunoBean.adicionarCurso}"/>
+		</fieldset>
+		
+		<h:commandButton value="Salvar" action="#{cadastrarAlunoBean.salvar}"/>
 	</h:form>
 </h:body>
 </html>
