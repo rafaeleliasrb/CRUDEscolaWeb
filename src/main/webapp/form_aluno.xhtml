@@ -13,19 +13,19 @@
 			<legend>Novo aluno</legend>
 			<h:panelGrid columns="2">
 				<h:outputLabel value="Nome" for="nome"/>
-				<h:inputText id="nome"/>
+				<h:inputText id="nome" value="#{cadastrarAlunoBean.aluno.nome}"/>
 				
 				<h:outputLabel value="Telefone" for="telefone"/>
-				<h:inputText id="telefone"/>
+				<h:inputText id="telefone" value="#{cadastrarAlunoBean.aluno.telefone}"/>
 				
 				<h:outputLabel value="Idade" for="idade"/>
-				<h:inputText id="idade"/>
+				<h:inputText id="idade" value="#{cadastrarAlunoBean.aluno.idade}"/>
 				
 				<h:outputLabel value="Email" for="email"/>
-				<h:inputText id="email"/>
+				<h:inputText id="email" value="#{cadastrarAlunoBean.aluno.email}"/>
 				
 				<h:outputLabel value="Curso" for="curso"/>
-				<h:inputText id="curso"/>
+				<h:inputText id="curso" value="#{cadastrarAlunoBean.aluno.curso}"/>
 			</h:panelGrid>
 			
 			<h:commandButton value="Salvar" action="#{cadastrarAlunoBean.salvar}"/>

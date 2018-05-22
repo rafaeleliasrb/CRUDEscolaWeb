@@ -103,4 +103,9 @@ public class Aluno implements Serializable {
 	public void setMatriculado(boolean isMatriculado) {
 		this.isMatriculado = isMatriculado;
 	}
+	
+	@Override
+	public String toString() {
+		return "Nome: " + nome + ", Email: " + email + ", Telefone: " + telefone + ", Idade: " + idade + ", Curso: " + curso;
+	}
 }
