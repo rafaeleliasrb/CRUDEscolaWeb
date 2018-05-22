@@ -26,6 +26,9 @@
 				
 				<h:outputLabel value="Curso" for="curso"/>
 				<h:inputText id="curso" value="#{cadastrarAlunoBean.aluno.curso}"/>
+				
+				<h:outputLabel value="Nota" for="nota"/>
+				<h:inputText id="nota" value="#{cadastrarAlunoBean.aluno.nota}"/>
 			</h:panelGrid>
 			
 			<h:commandButton value="Salvar" action="#{cadastrarAlunoBean.salvar}"/>
