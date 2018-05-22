@@ -7,15 +7,15 @@ import br.com.escola.model.domain.Professor;
 
 public class ProfessorDao {
 	
-	private List<Professor> BD = new ArrayList<>();
+	private List<Professor> database = new ArrayList<>();
 	
 	
 	public List<Professor> listar() {
-		return BD;
+		return database;
 	}
 	
 	public Professor buscar(int id) {
-		for (Professor professor : BD) {
+		for (Professor professor : database) {
 			if(professor.getId() == id) {
 				return professor;
 			}
@@ -24,7 +24,7 @@ public class ProfessorDao {
 	}
 	
 	public Professor buscar(String nome) {
-		for (Professor professor : BD) {
+		for (Professor professor : database) {
 			if(professor.getNome() == nome) {
 				return professor;
 			}
@@ -33,8 +33,8 @@ public class ProfessorDao {
 	}
 	
 	public void inserir(Professor professor) {
-		professor.setId(BD.size()+1);
-		BD.add(professor);
+		professor.setId(database.size()+1);
+		database.add(professor);
 	}
 	
 	public void alterar(Professor professor) {
@@ -42,7 +42,7 @@ public class ProfessorDao {
 		boolean foiEncontrado = indexBD > 0;
 		
 		if(foiEncontrado) {
-			BD.set(indexBD, professor);
+			database.set(indexBD, professor);
 		}
 	}
 	
@@ -51,15 +51,15 @@ public class ProfessorDao {
 		boolean foiEncontrado = indexBD > 0;
 		
 		if(foiEncontrado) {
-			BD.remove(indexBD);
+			database.remove(indexBD);
 		}
 	}
 
 	private int getIndexProfessor(int id) {
 		int indexBD = -1;
 		
-		for (int i = 0; i < BD.size(); i++) {
-			Professor modelTmp = BD.get(i);
+		for (int i = 0; i < database.size(); i++) {
+			Professor modelTmp = database.get(i);
 			
 			if(modelTmp.getId() == id) {
 				indexBD = i;

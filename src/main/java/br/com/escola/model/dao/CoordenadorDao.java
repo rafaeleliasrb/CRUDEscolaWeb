@@ -7,15 +7,15 @@ import br.com.escola.model.domain.Coordenador;
 
 public class CoordenadorDao {
 	
-	private List<Coordenador> BD = new ArrayList<>();
+	private List<Coordenador> database = new ArrayList<>();
 	
 	
 	public List<Coordenador> listar() {
-		return BD;
+		return database;
 	}
 	
 	public Coordenador buscar(int id) {
-		for (Coordenador coordenador : BD) {
+		for (Coordenador coordenador : database) {
 			if(coordenador.getId() == id) {
 				return coordenador;
 			}
@@ -24,7 +24,7 @@ public class CoordenadorDao {
 	}
 	
 	public Coordenador buscar(String nome) {
-		for (Coordenador coordenador : BD) {
+		for (Coordenador coordenador : database) {
 			if(coordenador.getNome() == nome) {
 				return coordenador;
 			}
@@ -33,8 +33,8 @@ public class CoordenadorDao {
 	}
 	
 	public void inserir(Coordenador coordenador) {
-		coordenador.setId(BD.size()+1);
-		BD.add(coordenador);
+		coordenador.setId(database.size()+1);
+		database.add(coordenador);
 	}
 	
 	public void alterar(Coordenador coordenador) {
@@ -42,7 +42,7 @@ public class CoordenadorDao {
 		boolean foiEncontrado = indexBD > 0;
 		
 		if(foiEncontrado) {
-			BD.set(indexBD, coordenador);
+			database.set(indexBD, coordenador);
 		}
 	}
 	
@@ -51,15 +51,15 @@ public class CoordenadorDao {
 		boolean foiEncontrado = indexBD > 0;
 		
 		if(foiEncontrado) {
-			BD.remove(indexBD);
+			database.remove(indexBD);
 		}
 	}
 
 	private int getIndexCoordenador(int id) {
 		int indexBD = -1;
 		
-		for (int i = 0; i < BD.size(); i++) {
-			Coordenador modelTmp = BD.get(i);
+		for (int i = 0; i < database.size(); i++) {
+			Coordenador modelTmp = database.get(i);
 			
 			if(modelTmp.getId() == id) {
 				indexBD = i;

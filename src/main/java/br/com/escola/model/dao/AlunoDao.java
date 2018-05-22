@@ -17,25 +17,20 @@ public class AlunoDao {
 	
 	@SuppressWarnings("unchecked")
 	public List<Aluno> listar() {		
-		List<Aluno> list = this.em
+		return this.em
 		        .createQuery("select t from Aluno as t")
 		        .getResultList();
-		
-		return list;
 	}
 	
 	public Aluno buscar(int idParam) {
-		Aluno aluno = this.em.find(Aluno.class, idParam);
-		return aluno;
+		return this.em.find(Aluno.class, idParam);
 	}
 	
 	@SuppressWarnings("unchecked")
 	public List<Aluno> buscar(String nomeParam) {
-		List<Aluno> list = this.em
+		return this.em
 		        .createQuery("select t from Aluno as t where nome like '%" + nomeParam + "%'")
 		        .getResultList();
-		
-		return list;
 	}
 	
 	public void inserir(Aluno aluno) {
@@ -58,7 +53,7 @@ public class AlunoDao {
 			this.em.remove(aluno);
 			this.em.getTransaction().commit();
 		} else {
-			throw new Exception("O aluno de ID = " + id + " n„o existe no banco");
+			throw new Exception("O aluno de ID = " + id + " n√£o existe no banco");
 		}
 	}
 

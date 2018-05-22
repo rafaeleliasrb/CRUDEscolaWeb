@@ -7,7 +7,10 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>CRUDEscolaWeb Maven Webapp</name>
   <url>http://maven.apache.org</url>
+  
   <properties>
+  		<hibernate.version>5.1.14.Final</hibernate.version>
+  
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<maven.compiler.source>1.8</maven.compiler.source>
@@ -24,7 +27,13 @@
 		<dependency>
 		    <groupId>org.hibernate</groupId>
 		    <artifactId>hibernate-core</artifactId>
-		    <version>5.1.14.Final</version>
+		    <version>${hibernate.version}</version>
+		</dependency>
+		
+		<dependency>
+		    <groupId>org.hibernate</groupId>
+		    <artifactId>hibernate-entitymanager</artifactId>
+		    <version>${hibernate.version}</version>
 		</dependency>
 
 		<dependency>
