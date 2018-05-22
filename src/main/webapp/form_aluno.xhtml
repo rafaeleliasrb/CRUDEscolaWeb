@@ -8,26 +8,28 @@
 </h:head>
 <h:body>
 	<h1>Cadastro de aluno</h1>
-	<fieldset>
-		<legend>Novo aluno</legend>
-		<h:panelGrid columns="2">
-			<h:outputLabel value="Nome" for="nome"/>
-			<h:inputText id="nome"/>
+	<h:form>
+		<fieldset>
+			<legend>Novo aluno</legend>
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Nome" for="nome"/>
+				<h:inputText id="nome"/>
+				
+				<h:outputLabel value="Telefone" for="telefone"/>
+				<h:inputText id="telefone"/>
+				
+				<h:outputLabel value="Idade" for="idade"/>
+				<h:inputText id="idade"/>
+				
+				<h:outputLabel value="Email" for="email"/>
+				<h:inputText id="email"/>
+				
+				<h:outputLabel value="Curso" for="curso"/>
+				<h:inputText id="curso"/>
+			</h:panelGrid>
 			
-			<h:outputLabel value="Telefone" for="telefone"/>
-			<h:inputText id="telefone"/>
-			
-			<h:outputLabel value="Idade" for="idade"/>
-			<h:inputText id="idade"/>
-			
-			<h:outputLabel value="Email" for="email"/>
-			<h:inputText id="email"/>
-			
-			<h:outputLabel value="Curso" for="curso"/>
-			<h:inputText id="curso"/>
-		</h:panelGrid>
-		
-		<h:commandButton value="Salvar"/>
-	</fieldset>
+			<h:commandButton value="Salvar" action="#{cadastrarAlunoBean.salvar}"/>
+		</fieldset>
+	</h:form>
 </h:body>
 </html>
