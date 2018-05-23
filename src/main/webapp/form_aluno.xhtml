@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>Insert title here</title>
+</h:head>
+<h:body>
+	<h:form>
+		<fieldset>
+			<legend>Novo Aluno</legend>
+			<h:panelGrid columns="2">
+				<h:outputLabel value="Nome"></h:outputLabel>
+				<h:inputText value="#{formAlunoBean.aluno.nome}"></h:inputText>
+				
+				<h:outputLabel value="Email"></h:outputLabel>
+				<h:inputText value="#{formAlunoBean.aluno.email}"></h:inputText>
+				
+				<h:outputLabel value="Telefone"></h:outputLabel>
+				<h:inputText value="#{formAlunoBean.aluno.telefone}"></h:inputText>
+				
+				<h:outputLabel value="Idade"></h:outputLabel>
+				<h:inputText value="#{formAlunoBean.aluno.idade}"></h:inputText>
+			</h:panelGrid>
+		</fieldset>
+		
+		<fieldset>
+			<legend>Novo Curso</legend>
+			<h:selectOneMenu value="#{formAlunoBean.cursoId}">
+				<f:selectItems value="#{formAlunoBean.cursos}" var="curso"
+					itemLabel="#{curso.nome}" itemValue="#{curso.id}"></f:selectItems>
+			</h:selectOneMenu>
+		</fieldset>
+		
+		<h:commandButton value="Gravar" action="#{formAlunoBean.gravar}"></h:commandButton>
+	</h:form>
+</h:body>
+</html>
