@@ -21,12 +21,13 @@ public class CadastrarAlunoBean {
 	public void salvar() {
 		System.out.println("Salvando aluno ...");
 		alunoService.salvar(aluno);
-		aluno = new Aluno();
+		//aluno = new Aluno();
 	}
 
 	public void adicionarCurso() {
 		Curso curso = cursoService.buscar(idCurso);
 		aluno.adicionarCurso(curso);
+		System.out.println("Adicionando o Curso de " + curso.getNome());
 	}
 	
 	public Aluno getAluno() {
