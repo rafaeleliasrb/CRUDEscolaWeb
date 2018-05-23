@@ -29,7 +29,8 @@
 				</h:inputText>
 				
 				<h:outputLabel value="Email" for="email"/>
-				<h:inputText id="email" value="#{cadastrarAlunoBean.aluno.email}"/>
+				<h:inputText id="email" value="#{cadastrarAlunoBean.aluno.email}"
+					validator="#{cadastrarAlunoBean.ehUmEmail}"/>
 				
 				<h:outputLabel value="Nota" for="nota"/>
 				<h:inputText id="nota" value="#{cadastrarAlunoBean.aluno.nota}"/>
