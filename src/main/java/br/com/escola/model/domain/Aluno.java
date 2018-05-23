@@ -37,7 +37,7 @@ public class Aluno implements Serializable {
 	private List<Curso> cursos = new ArrayList<>();
 	
 	@Temporal(TemporalType.DATE)
-	private Calendar dataNascimento;
+	private Calendar dataNascimento = Calendar.getInstance();
 	
 	@Transient
 	private int idade;

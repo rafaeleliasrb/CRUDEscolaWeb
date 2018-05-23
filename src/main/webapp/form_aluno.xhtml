@@ -21,7 +21,9 @@
 				<h:inputText id="telefone" value="#{cadastrarAlunoBean.aluno.telefone}"/>
 				
 				<h:outputLabel value="Data nascimento" for="dataNascimento"/>
-				<h:inputText id="dataNascimento" value="#{cadastrarAlunoBean.aluno.dataNascimento}"/>
+				<h:inputText id="dataNascimento" value="#{cadastrarAlunoBean.aluno.dataNascimento.time}">
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
+				</h:inputText>
 				
 				<h:outputLabel value="Email" for="email"/>
 				<h:inputText id="email" value="#{cadastrarAlunoBean.aluno.email}"/>
