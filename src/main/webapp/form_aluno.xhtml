@@ -15,10 +15,13 @@
 			<legend>Novo aluno</legend>
 			<h:panelGrid columns="2">
 				<h:outputLabel value="Nome" for="nome"/>
-				<h:inputText id="nome" value="#{cadastrarAlunoBean.aluno.nome}"/>
+				<h:inputText id="nome" value="#{cadastrarAlunoBean.aluno.nome}" 
+					required="true" requiredMessage="O nome do aluno é obrigatório"/>
 				
 				<h:outputLabel value="Telefone" for="telefone"/>
-				<h:inputText id="telefone" value="#{cadastrarAlunoBean.aluno.telefone}"/>
+				<h:inputText id="telefone" value="#{cadastrarAlunoBean.aluno.telefone}">
+					<f:validateLength maximum="10" />
+				</h:inputText>
 				
 				<h:outputLabel value="Data nascimento" for="dataNascimento"/>
 				<h:inputText id="dataNascimento" value="#{cadastrarAlunoBean.aluno.dataNascimento.time}">
