@@ -3,12 +3,14 @@ package br.com.escola.bean;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ViewScoped;
 
 import br.com.escola.model.domain.Aluno;
 import br.com.escola.model.domain.Curso;
 import br.com.escola.model.service.AlunoService;
 import br.com.escola.model.service.CursoService;
 
+@ViewScoped
 @ManagedBean
 public class CadastrarAlunoBean {
 
