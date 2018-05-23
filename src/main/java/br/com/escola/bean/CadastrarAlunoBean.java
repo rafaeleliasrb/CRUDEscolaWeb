@@ -2,8 +2,10 @@ package br.com.escola.bean;
 
 import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
 
 import br.com.escola.model.domain.Aluno;
 import br.com.escola.model.domain.Curso;
@@ -21,15 +23,17 @@ public class CadastrarAlunoBean {
 	private Integer idCurso;
 	
 	public void salvar() {
-		System.out.println("Salvando aluno ...");
+		if(aluno.getCursos().isEmpty()) {
+			FacesContext.getCurrentInstance().addMessage("curso",  new FacesMessage("Aluno deve ter pelo menos um Curso"));
+            return;
+		}
 		alunoService.salvar(aluno);
-		//aluno = new Aluno();
+		aluno = new Aluno();
 	}
 
 	public void adicionarCurso() {
 		Curso curso = cursoService.buscar(idCurso);
 		aluno.adicionarCurso(curso);
-		System.out.println("Adicionando o Curso de " + curso.getNome());
 	}
 	
 	public Aluno getAluno() {
