@@ -2,12 +2,8 @@ package br.com.escola.bean;
 
 import java.util.List;
 
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
 
 import br.com.escola.model.domain.Aluno;
 import br.com.escola.model.domain.Curso;
@@ -34,14 +30,6 @@ public class CadastrarAlunoBean {
 		Curso curso = cursoService.buscar(idCurso);
 		aluno.adicionarCurso(curso);
 		System.out.println("Adicionando o Curso de " + curso.getNome());
-	}
-	
-	public void ehUmEmail(FacesContext fc, UIComponent component, Object value) throws ValidatorException {
-	    String valor = value.toString();
-	    System.out.println(valor);
-	    if (!valor.contains("@")) {
-	        throw new ValidatorException(new FacesMessage("Deveria ter um @ no e-mail"));
-	    }
 	}
 	
 	public Aluno getAluno() {
