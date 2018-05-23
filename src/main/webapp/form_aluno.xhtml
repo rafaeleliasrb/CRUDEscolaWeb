@@ -9,6 +9,7 @@
 </h:head>
 <h:body>
 	<h1>Cadastro de aluno</h1>
+	<h:messages/>
 	<h:form>
 		<fieldset>
 			<legend>Novo aluno</legend>
@@ -19,9 +20,11 @@
 				<h:outputLabel value="Telefone" for="telefone"/>
 				<h:inputText id="telefone" value="#{cadastrarAlunoBean.aluno.telefone}"/>
 				
+				<h:outputLabel value="Data nascimento" for="dataNascimento"/>
+				<h:inputText id="dataNascimento" value="#{cadastrarAlunoBean.aluno.dataNascimento}"/>
+				
 				<h:outputLabel value="Email" for="email"/>
 				<h:inputText id="email" value="#{cadastrarAlunoBean.aluno.email}"/>
-				
 				
 				<h:outputLabel value="Nota" for="nota"/>
 				<h:inputText id="nota" value="#{cadastrarAlunoBean.aluno.nota}"/>
