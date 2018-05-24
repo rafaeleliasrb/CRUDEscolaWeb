@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.PostLoad;
+import javax.persistence.PostPersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -53,6 +54,7 @@ public class Aluno implements Serializable {
 	}
 	
 	@PostLoad
+	@PostPersist
 	private void carregaIdade() {
         Calendar hoje = Calendar.getInstance();
         int ajusteParaSaberSeJaFezAniversario = 0;
