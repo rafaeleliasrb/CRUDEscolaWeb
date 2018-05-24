@@ -45,7 +45,9 @@
 					itemLabel="#{curso.nome}" itemValue="#{curso.id}"/>
 			</h:selectOneMenu>
 			
-			<h:commandButton value="Salvar" action="#{cadastrarAlunoBean.adicionarCurso}"/>
+			<h:commandButton value="Salvar" action="#{cadastrarAlunoBean.adicionarCurso}">
+				<f:ajax execute="curso"/>
+			</h:commandButton>
 		</fieldset>
 		
 		<h:commandButton value="Salvar" action="#{cadastrarAlunoBean.salvar}"/>
