@@ -15,8 +15,13 @@
 			<legend>Novo aluno</legend>
 			<h:panelGrid columns="2">
 				<h:outputLabel value="Nome" for="nome"/>
-				<h:inputText id="nome" value="#{cadastrarAlunoBean.aluno.nome}" 
-					required="true" requiredMessage="O nome do aluno é obrigatório"/>
+				<h:panelGroup>
+					<h:inputText id="nome" value="#{cadastrarAlunoBean.aluno.nome}" 
+						required="true" requiredMessage="O nome do aluno é obrigatório">
+						<f:ajax execute="nome" event="blur" render="teste"/>
+					</h:inputText>
+					<h:message for="nome" id="teste"/>
+				</h:panelGroup>
 				
 				<h:outputLabel value="Telefone" for="telefone"/>
 				<h:inputText id="telefone" value="#{cadastrarAlunoBean.aluno.telefone}">
@@ -46,8 +51,14 @@
 			</h:selectOneMenu>
 			
 			<h:commandButton value="Salvar" action="#{cadastrarAlunoBean.adicionarCurso}">
-				<f:ajax execute="curso"/>
+				<f:ajax execute="curso" render="cursosDoAluno"/>
 			</h:commandButton>
+			
+			<h:dataTable id="cursosDoAluno" value="#{cadastrarAlunoBean.aluno.cursos}" var="curso">
+				<h:column>
+					<h:outputText value="#{curso.nome}"/>
+				</h:column>
+			</h:dataTable>
 		</fieldset>
 		
 		<h:commandButton value="Salvar" action="#{cadastrarAlunoBean.salvar}"/>
