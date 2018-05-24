@@ -55,4 +55,8 @@ public class CadastrarAlunoBean {
 	public void setIdCurso(Integer idCurso) {
 		this.idCurso = idCurso;
 	}
+	
+	public List<Aluno> getAlunos() {
+		return alunoService.listar();
+	}
 }

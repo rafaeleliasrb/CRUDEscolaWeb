@@ -36,9 +36,6 @@
 				<h:outputLabel value="Email" for="email"/>
 				<h:inputText id="email" value="#{cadastrarAlunoBean.aluno.email}"
 					validator="emailValidator"/>
-				
-				<h:outputLabel value="Nota" for="nota"/>
-				<h:inputText id="nota" value="#{cadastrarAlunoBean.aluno.nota}"/>
 			</h:panelGrid>
 		</fieldset>
 		
@@ -61,7 +58,31 @@
 			</h:dataTable>
 		</fieldset>
 		
-		<h:commandButton value="Salvar" action="#{cadastrarAlunoBean.salvar}"/>
+		<h:commandButton value="Salvar" action="#{cadastrarAlunoBean.salvar}">
+			<f:ajax execute="@form" render="@form :alunos"/>
+		</h:commandButton>
 	</h:form>
+	
+	<h:dataTable id="alunos" value="#{cadastrarAlunoBean.alunos}" var="aluno" cellspacing="5">
+		<h:column>
+			<f:facet name="header">Nome</f:facet>
+			<h:outputText value="#{aluno.nome}"/>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Idade</f:facet>
+			<h:outputText value="#{aluno.idade}"/>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Telefone</f:facet>
+			<h:outputText value="#{aluno.telefone}"/>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">E-mail</f:facet>
+			<h:outputText value="#{aluno.email}"/>
+		</h:column>
+	</h:dataTable>
 </h:body>
 </html>
