@@ -9,8 +9,8 @@
 </h:head>
 <h:body>
 	<h1>Cadastro de aluno</h1>
-	<h:messages/>
 	<h:form>
+		<h:messages/>
 		<fieldset>
 			<legend>Novo aluno</legend>
 			<h:panelGrid columns="2">
@@ -30,7 +30,7 @@
 				
 				<h:outputLabel value="Data nascimento" for="dataNascimento"/>
 				<h:inputText id="dataNascimento" value="#{cadastrarAlunoBean.aluno.dataNascimento.time}">
-					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" />
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
 				</h:inputText>
 				
 				<h:outputLabel value="Email" for="email"/>

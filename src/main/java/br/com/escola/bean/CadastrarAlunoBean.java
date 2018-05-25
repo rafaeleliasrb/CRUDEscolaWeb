@@ -24,7 +24,7 @@ public class CadastrarAlunoBean {
 	
 	public void salvar() {
 		if(aluno.getCursos().isEmpty()) {
-			FacesContext.getCurrentInstance().addMessage("curso",  new FacesMessage("Aluno deve ter pelo menos um Curso"));
+			FacesContext.getCurrentInstance().addMessage(null,  new FacesMessage("Aluno deve ter pelo menos um Curso"));
             return;
 		}
 		alunoService.salvar(aluno);
