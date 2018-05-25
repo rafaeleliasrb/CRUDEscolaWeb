@@ -36,6 +36,11 @@ public class CadastrarAlunoBean {
 		aluno.adicionarCurso(curso);
 	}
 	
+	public String cadastrarNovoCurso() {
+		System.out.println("Indo para o cadastro de Curso");
+		return "form_curso";
+	}
+	
 	public Aluno getAluno() {
 		return aluno;
 	}

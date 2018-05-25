@@ -18,9 +18,9 @@
 				<h:panelGroup>
 					<h:inputText id="nome" value="#{cadastrarAlunoBean.aluno.nome}" 
 						required="true" requiredMessage="O nome do aluno é obrigatório">
-						<f:ajax execute="nome" event="blur" render="teste"/>
+						<f:ajax execute="nome" event="blur" render="messagemAluno"/>
 					</h:inputText>
-					<h:message for="nome" id="teste"/>
+					<h:message for="nome" id="messagemAluno"/>
 				</h:panelGroup>
 				
 				<h:outputLabel value="Telefone" for="telefone"/>
@@ -50,6 +50,9 @@
 			<h:commandButton value="Salvar" action="#{cadastrarAlunoBean.adicionarCurso}">
 				<f:ajax execute="curso" render="cursosDoAluno"/>
 			</h:commandButton>
+			
+			<br/>
+			<h:commandLink value="Cadastrar Novo Curso" action="#{cadastrarAlunoBean.cadastrarNovoCurso}" immediate="true"/>
 			
 			<h:dataTable id="cursosDoAluno" value="#{cadastrarAlunoBean.aluno.cursos}" var="curso">
 				<h:column>
