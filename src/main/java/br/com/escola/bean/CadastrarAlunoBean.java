@@ -38,7 +38,7 @@ public class CadastrarAlunoBean {
 	
 	public String cadastrarNovoCurso() {
 		System.out.println("Indo para o cadastro de Curso");
-		return "form_curso";
+		return "form_curso?faces-redirect=true";
 	}
 	
 	public Aluno getAluno() {
