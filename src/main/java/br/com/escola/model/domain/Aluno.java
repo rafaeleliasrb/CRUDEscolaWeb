@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.PostLoad;
 import javax.persistence.PostPersist;
+import javax.persistence.PostUpdate;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -55,6 +56,7 @@ public class Aluno implements Serializable {
 	
 	@PostLoad
 	@PostPersist
+	@PostUpdate
 	private void carregaIdade() {
         Calendar hoje = Calendar.getInstance();
         int ajusteParaSaberSeJaFezAniversario = 0;
@@ -102,6 +104,10 @@ public class Aluno implements Serializable {
 
 	public void adicionarCurso(Curso curso) {
 		cursos.add(curso);
+	}
+	
+	public void removerCurso(Curso curso) {
+		cursos.remove(curso);
 	}
 
 	public int getIdade() {

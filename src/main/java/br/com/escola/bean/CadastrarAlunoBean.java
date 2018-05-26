@@ -41,6 +41,21 @@ public class CadastrarAlunoBean {
 		return "form_curso?faces-redirect=true";
 	}
 	
+	public void remover(Aluno aluno) throws Exception {
+		System.out.println("Removendo o aluno de id: " + aluno.getId());
+		alunoService.remover(aluno.getId());
+	}
+	
+	public void preparaAlteracao(Aluno aluno) {
+		System.out.println("Carregando aluno de id: " + aluno.getId() + " para alterar");
+		this.aluno = aluno;
+	}
+	
+	public void removerCursoDoAluno(Curso curso) {
+		System.out.println("Removendo o curso de id: " + curso.getId());
+		aluno.removerCurso(curso);
+	}
+	
 	public Aluno getAluno() {
 		return aluno;
 	}

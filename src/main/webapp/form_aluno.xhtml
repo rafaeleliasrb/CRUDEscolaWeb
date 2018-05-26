@@ -58,35 +58,52 @@
 					<h:column>
 						<h:outputText value="#{curso.nome}"/>
 					</h:column>
+					removerCursoDoAluno
+					<h:column>
+						<h:commandLink value="X" action="#{cadastrarAlunoBean.removerCursoDoAluno(curso)}"/>
+					</h:column>
 				</h:dataTable>
 			</fieldset>
 			
 			<h:commandButton value="Salvar" action="#{cadastrarAlunoBean.salvar}">
-				<f:ajax execute="@form" render="@form :alunos"/>
+				<f:ajax execute="@form" render="@form :formListarAlunos:alunos"/>
 			</h:commandButton>
 		</h:form>
 		
-		<h:dataTable id="alunos" value="#{cadastrarAlunoBean.alunos}" var="aluno" cellspacing="5">
-			<h:column>
-				<f:facet name="header">Nome</f:facet>
-				<h:outputText value="#{aluno.nome}"/>
-			</h:column>
-			
-			<h:column>
-				<f:facet name="header">Idade</f:facet>
-				<h:outputText value="#{aluno.idade}"/>
-			</h:column>
-			
-			<h:column>
-				<f:facet name="header">Telefone</f:facet>
-				<h:outputText value="#{aluno.telefone}"/>
-			</h:column>
-			
-			<h:column>
-				<f:facet name="header">E-mail</f:facet>
-				<h:outputText value="#{aluno.email}"/>
-			</h:column>
-		</h:dataTable>
+		<h:form id="formListarAlunos">
+			<fieldset>
+				<legend>Alunos</legend>
+				<h:dataTable id="alunos" value="#{cadastrarAlunoBean.alunos}" var="aluno" cellspacing="5">
+					<h:column>
+						<f:facet name="header">Nome</f:facet>
+						<h:outputText value="#{aluno.nome}"/>
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Idade</f:facet>
+						<h:outputText value="#{aluno.idade}"/>
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">Telefone</f:facet>
+						<h:outputText value="#{aluno.telefone}"/>
+					</h:column>
+					
+					<h:column>
+						<f:facet name="header">E-mail</f:facet>
+						<h:outputText value="#{aluno.email}"/>
+					</h:column>
+					
+					<h:column>
+						<h:commandLink value="Remover" action="#{cadastrarAlunoBean.remover(aluno)}"/>
+					</h:column>
+					
+					<h:column>
+						<h:commandLink value="Alterar" action="#{cadastrarAlunoBean.preparaAlteracao(aluno)}"/>
+					</h:column>
+				</h:dataTable>
+			</fieldset>
+		</h:form>
 	</ui:define>
 </ui:composition>
 </html>
