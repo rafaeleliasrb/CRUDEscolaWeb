@@ -12,7 +12,7 @@
 			<h:messages/>
 			<fieldset>
 				<legend>Novo curso</legend>
-				<h:panelGrid columns="2">
+				<h:panelGrid columns="3">
 					<h:outputLabel value="Nome" for="nome"/>
 					<h:panelGroup>
 						<h:inputText id="nome" value="#{cadastrarCursoBean.curso.nome}" 
@@ -21,7 +21,9 @@
 						</h:inputText>
 						<h:message for="nome" id="mensagemCurso"/>
 					</h:panelGroup>
+					<h:commandButton value="Salvar" action="#{cadastrarCursoBean.salvar}"/>
 				</h:panelGrid>
+				
 			</fieldset>
 		</h:form>
 	</ui:define>

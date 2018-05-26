@@ -16,4 +16,14 @@ public class CursoService {
 	public Curso buscar(int id) {
 		return this.dao.buscar(id);
 	}
+	
+	public void salvar(Curso curso) {
+		if(curso != null) {
+			if(curso.getIdInt() > 0) {
+				dao.alterar(curso);
+			} else {
+				dao.inserir(curso);
+			}
+		}
+	}
 }

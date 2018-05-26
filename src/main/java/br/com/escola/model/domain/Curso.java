@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @SuppressWarnings("serial")
 @Entity
@@ -18,6 +19,11 @@ public class Curso implements Serializable {
 	private Integer id;
 	
 	private String nome;
+	
+	@Transient
+	public int getIdInt() {
+		return getId() == null ? 0 : getId();
+	}
 
 	public Integer getId() {
 		return id;

@@ -25,4 +25,16 @@ public class CursoDao {
 	public Curso buscar(int idParam) {
 		return this.em.find(Curso.class, idParam);
 	}
+	
+	public void inserir(Curso curso) {
+		this.em.getTransaction().begin();        
+		this.em.persist(curso);
+		this.em.getTransaction().commit();
+	}
+	
+	public void alterar(Curso curso) {
+		this.em.getTransaction().begin();        
+		this.em.merge(curso);
+		this.em.getTransaction().commit();
+	}
 }
