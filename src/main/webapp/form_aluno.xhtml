@@ -2,96 +2,91 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
-<h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"></link>
-<title>ESCOLA</title>
-</h:head>
-<h:body>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-	  	<a class="navbar-brand" href="index.jsp">
-			<h:graphicImage library="img" name="logo.png" width="80"/>
-	  	</a>
-	</nav>
-	<h1>Cadastro de aluno</h1>
-	<h:form>
-		<h:messages/>
-		<fieldset>
-			<legend>Novo aluno</legend>
-			<h:panelGrid columns="2">
-				<h:outputLabel value="Nome" for="nome"/>
-				<h:panelGroup>
-					<h:inputText id="nome" value="#{cadastrarAlunoBean.aluno.nome}" 
-						required="true" requiredMessage="O nome do aluno é obrigatório">
-						<f:ajax execute="nome" event="blur" render="messagemAluno"/>
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition template="_template.xhtml">
+	<ui:define name="titulo">Cadastro de aluno</ui:define>
+	<ui:define name="conteudo">
+		<h:form>
+			<h:messages/>
+			<fieldset>
+				<legend>Novo aluno</legend>
+				<h:panelGrid columns="2">
+					<h:outputLabel value="Nome" for="nome"/>
+					<h:panelGroup>
+						<h:inputText id="nome" value="#{cadastrarAlunoBean.aluno.nome}" 
+							required="true" requiredMessage="O nome do aluno é obrigatório">
+							<f:ajax execute="nome" event="blur" render="messagemAluno"/>
+						</h:inputText>
+						<h:message for="nome" id="messagemAluno"/>
+					</h:panelGroup>
+					
+					<h:outputLabel value="Telefone" for="telefone"/>
+					<h:inputText id="telefone" value="#{cadastrarAlunoBean.aluno.telefone}">
+						<f:validateLength maximum="10" />
 					</h:inputText>
-					<h:message for="nome" id="messagemAl	uno"/>
-				</h:panelGroup>
-				
-				<h:outputLabel value="Telefone" for="telefone"/>
-				<h:inputText id="telefone" value="#{cadastrarAlunoBean.aluno.telefone}">
-					<f:validateLength maximum="10" />
-				</h:inputText>
-				
-				<h:outputLabel value="Data nascimento" for="dataNascimento"/>
-				<h:inputText id="dataNascimento" value="#{cadastrarAlunoBean.aluno.dataNascimento.time}">
-					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
-				</h:inputText>
-				
-				<h:outputLabel value="Email" for="email"/>
-				<h:inputText id="email" value="#{cadastrarAlunoBean.aluno.email}"
-					validator="emailValidator"/>
-			</h:panelGrid>
-		</fieldset>
-		
-		<fieldset>
-			<legend>Adicionar curso</legend>
-			<h:outputLabel value="Curso" for="curso"/>
-			<h:selectOneMenu id="curso" value="#{cadastrarAlunoBean.idCurso}">
-				<f:selectItems value="#{cadastrarAlunoBean.cursos}" var="curso" 
-					itemLabel="#{curso.nome}" itemValue="#{curso.id}"/>
-			</h:selectOneMenu>
+					
+					<h:outputLabel value="Data nascimento" for="dataNascimento"/>
+					<h:inputText id="dataNascimento" value="#{cadastrarAlunoBean.aluno.dataNascimento.time}">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
+					</h:inputText>
+					
+					<h:outputLabel value="Email" for="email"/>
+					<h:inputText id="email" value="#{cadastrarAlunoBean.aluno.email}"
+						validator="emailValidator"/>
+				</h:panelGrid>
+			</fieldset>
 			
-			<h:commandButton value="Salvar" action="#{cadastrarAlunoBean.adicionarCurso}">
-				<f:ajax execute="curso" render="cursosDoAluno"/>
+			<fieldset>
+				<legend>Adicionar curso</legend>
+				<h:outputLabel value="Curso" for="curso"/>
+				<h:selectOneMenu id="curso" value="#{cadastrarAlunoBean.idCurso}">
+					<f:selectItems value="#{cadastrarAlunoBean.cursos}" var="curso" 
+						itemLabel="#{curso.nome}" itemValue="#{curso.id}"/>
+				</h:selectOneMenu>
+				
+				<h:commandButton value="Salvar" action="#{cadastrarAlunoBean.adicionarCurso}">
+					<f:ajax execute="curso" render="cursosDoAluno"/>
+				</h:commandButton>
+				
+				<br/>
+				<h:commandLink value="Cadastrar Novo Curso" action="#{cadastrarAlunoBean.cadastrarNovoCurso}" 
+					immediate="true"/>
+				
+				<h:dataTable id="cursosDoAluno" value="#{cadastrarAlunoBean.aluno.cursos}" var="curso">
+					<h:column>
+						<h:outputText value="#{curso.nome}"/>
+					</h:column>
+				</h:dataTable>
+			</fieldset>
+			
+			<h:commandButton value="Salvar" action="#{cadastrarAlunoBean.salvar}">
+				<f:ajax execute="@form" render="@form :alunos"/>
 			</h:commandButton>
+		</h:form>
+		
+		<h:dataTable id="alunos" value="#{cadastrarAlunoBean.alunos}" var="aluno" cellspacing="5">
+			<h:column>
+				<f:facet name="header">Nome</f:facet>
+				<h:outputText value="#{aluno.nome}"/>
+			</h:column>
 			
-			<br/>
-			<h:commandLink value="Cadastrar Novo Curso" action="#{cadastrarAlunoBean.cadastrarNovoCurso}" immediate="true"/>
+			<h:column>
+				<f:facet name="header">Idade</f:facet>
+				<h:outputText value="#{aluno.idade}"/>
+			</h:column>
 			
-			<h:dataTable id="cursosDoAluno" value="#{cadastrarAlunoBean.aluno.cursos}" var="curso">
-				<h:column>
-					<h:outputText value="#{curso.nome}"/>
-				</h:column>
-			</h:dataTable>
-		</fieldset>
-		
-		<h:commandButton value="Salvar" action="#{cadastrarAlunoBean.salvar}">
-			<f:ajax execute="@form" render="@form :alunos"/>
-		</h:commandButton>
-	</h:form>
-	
-	<h:dataTable id="alunos" value="#{cadastrarAlunoBean.alunos}" var="aluno" cellspacing="5">
-		<h:column>
-			<f:facet name="header">Nome</f:facet>
-			<h:outputText value="#{aluno.nome}"/>
-		</h:column>
-		
-		<h:column>
-			<f:facet name="header">Idade</f:facet>
-			<h:outputText value="#{aluno.idade}"/>
-		</h:column>
-		
-		<h:column>
-			<f:facet name="header">Telefone</f:facet>
-			<h:outputText value="#{aluno.telefone}"/>
-		</h:column>
-		
-		<h:column>
-			<f:facet name="header">E-mail</f:facet>
-			<h:outputText value="#{aluno.email}"/>
-		</h:column>
-	</h:dataTable>
-</h:body>
+			<h:column>
+				<f:facet name="header">Telefone</f:facet>
+				<h:outputText value="#{aluno.telefone}"/>
+			</h:column>
+			
+			<h:column>
+				<f:facet name="header">E-mail</f:facet>
+				<h:outputText value="#{aluno.email}"/>
+			</h:column>
+		</h:dataTable>
+	</ui:define>
+</ui:composition>
 </html>
