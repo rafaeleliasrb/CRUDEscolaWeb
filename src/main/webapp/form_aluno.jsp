@@ -75,10 +75,10 @@
 				    <small id="emailHelp" class="form-text text-muted">Nunca iremos compartilhar seu email com ninguém.</small>
 				</div>
 				
-		        <div class="form-group col-4">
+		        <%-- <div class="form-group col-4">
 				    <label for="curso">Curso</label>
 				    <input type="text" class="form-control" id="curso" name="curso" placeholder="Insira seu curso" value="<%= (aluno != null && aluno.getCurso() != null) ? aluno.getCurso() : "" %>" >
-				</div>
+				</div> --%>
 			
 		        <div class="form-group col-1">
 				    <label for="nota">Nota</label>

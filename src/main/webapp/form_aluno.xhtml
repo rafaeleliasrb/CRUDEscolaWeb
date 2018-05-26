@@ -5,9 +5,15 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core">
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"></link>
 <title>ESCOLA</title>
 </h:head>
 <h:body>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  	<a class="navbar-brand" href="index.jsp">
+			<h:graphicImage library="img" name="logo.png" width="80"/>
+	  	</a>
+	</nav>
 	<h1>Cadastro de aluno</h1>
 	<h:form>
 		<h:messages/>
@@ -20,7 +26,7 @@
 						required="true" requiredMessage="O nome do aluno é obrigatório">
 						<f:ajax execute="nome" event="blur" render="messagemAluno"/>
 					</h:inputText>
-					<h:message for="nome" id="messagemAluno"/>
+					<h:message for="nome" id="messagemAl	uno"/>
 				</h:panelGroup>
 				
 				<h:outputLabel value="Telefone" for="telefone"/>
