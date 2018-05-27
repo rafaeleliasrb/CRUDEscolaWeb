@@ -7,12 +7,11 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="_template.xhtml">
-	<ui:define name="titulo">Cadastro de aluno</ui:define>
+	<ui:param name="titulo" value="Cadastro de aluno" />
 	<ui:define name="conteudo">
 		<h:form id="formNovoAluno">
 			<p:messages globalOnly="true"/>
-			<fieldset>
-				<legend>Novo aluno</legend>
+			<p:fieldset legend="Novo aluno">
 				<h:panelGrid columns="2">
 					<p:outputLabel value="Nome" for="nome"/>
 					<h:panelGroup>
@@ -36,11 +35,9 @@
 					<p:inputText id="email" value="#{cadastrarAlunoBean.aluno.email}"
 						validator="emailValidator"/>
 				</h:panelGrid>
-			</fieldset>
+			</p:fieldset>
 			
-			<fieldset>
-				<legend>Adicionar curso</legend>
-				
+			<p:fieldset legend="Adicionar curso">
 				<h:panelGrid columns="4">
 					<p:outputLabel value="Curso" for="curso"/>
 					<p:selectOneMenu id="curso" value="#{cadastrarAlunoBean.idCurso}">
@@ -61,15 +58,14 @@
 						update="cursosDoAluno"/>
 					<h:outputText value="#{curso.nome}" />
 				</p:dataList>
-			</fieldset>
+			</p:fieldset>
 			
 			<p:commandButton value="Salvar" action="#{cadastrarAlunoBean.salvar}"
 				process="@form" update="@form :formListarAlunos:alunos"/>
 		</h:form>
 		
 		<h:form id="formListarAlunos">
-			<fieldset>
-				<legend>Alunos</legend>
+			<p:fieldset legend="Alunos">
 				<p:dataTable id="alunos" value="#{cadastrarAlunoBean.alunos}" var="aluno" cellspacing="5"
 					paginator="true" rows="5">
 					<p:column headerText="Nome" sortBy="#{aluno.nome}" filterBy="#{aluno.nome}">
@@ -98,7 +94,7 @@
 							update=":formNovoAluno"/>
 					</p:column>
 				</p:dataTable>
-			</fieldset>
+			</p:fieldset>
 		</h:form>
 	</ui:define>
 </ui:composition>
