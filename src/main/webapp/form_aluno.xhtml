@@ -40,18 +40,19 @@
 			
 			<fieldset>
 				<legend>Adicionar curso</legend>
-				<p:outputLabel value="Curso" for="curso"/>
-				<p:selectOneMenu id="curso" value="#{cadastrarAlunoBean.idCurso}">
-					<f:selectItems value="#{cadastrarAlunoBean.cursos}" var="curso" 
-						itemLabel="#{curso.nome}" itemValue="#{curso.id}"/>
-				</p:selectOneMenu>
 				
-				<p:commandButton value="Salvar" action="#{cadastrarAlunoBean.adicionarCurso}"
-					process="@this curso" update="cursosDoAluno"/>
-				
-				<br/>
-				<p:commandLink value="Cadastrar Novo Curso" action="#{cadastrarAlunoBean.cadastrarNovoCurso}" 
-					immediate="true"/>
+				<h:panelGrid columns="4">
+					<p:outputLabel value="Curso" for="curso"/>
+					<p:selectOneMenu id="curso" value="#{cadastrarAlunoBean.idCurso}">
+						<f:selectItems value="#{cadastrarAlunoBean.cursos}" var="curso" 
+							itemLabel="#{curso.nome}" itemValue="#{curso.id}"/>
+					</p:selectOneMenu>
+					
+					<p:commandButton value="Adicionar Curso" action="#{cadastrarAlunoBean.adicionarCurso}"
+						process="@this curso" update="cursosDoAluno"/>
+					<p:commandLink value="Cadastrar Novo Curso" action="#{cadastrarAlunoBean.cadastrarNovoCurso}" 
+						immediate="true"/>
+				</h:panelGrid>
 				
 				<p:dataList id="cursosDoAluno" value="#{cadastrarAlunoBean.aluno.cursos}" var="curso"
 					type="definition">
@@ -69,12 +70,13 @@
 		<h:form id="formListarAlunos">
 			<fieldset>
 				<legend>Alunos</legend>
-				<p:dataTable id="alunos" value="#{cadastrarAlunoBean.alunos}" var="aluno" cellspacing="5">
-					<p:column headerText="Nome">
+				<p:dataTable id="alunos" value="#{cadastrarAlunoBean.alunos}" var="aluno" cellspacing="5"
+					paginator="true" rows="5">
+					<p:column headerText="Nome" sortBy="#{aluno.nome}" filterBy="#{aluno.nome}">
 						<h:outputText value="#{aluno.nome}"/>
 					</p:column>
 					
-					<p:column headerText="Idade">
+					<p:column headerText="Idade" sortBy="#{aluno.idade}">
 						<h:outputText value="#{aluno.idade}"/>
 					</p:column>
 					
@@ -82,7 +84,7 @@
 						<h:outputText value="#{aluno.telefone}"/>
 					</p:column>
 					
-					<p:column headerText="E-mail">
+					<p:column headerText="E-mail" filterBy="#{aluno.email}">
 						<h:outputText value="#{aluno.email}"/>
 					</p:column>
 					

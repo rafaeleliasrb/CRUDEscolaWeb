@@ -21,6 +21,7 @@ public class CadastrarAlunoBean {
 	
 	private Aluno aluno = new Aluno();
 	private Integer idCurso;
+	private List<Aluno> alunos;
 	
 	public void salvar() {
 		if(aluno.getCursos().isEmpty()) {
@@ -28,6 +29,8 @@ public class CadastrarAlunoBean {
             return;
 		}
 		alunoService.salvar(aluno);
+		
+		alunos = alunoService.listar();
 		aluno = new Aluno();
 	}
 
@@ -77,6 +80,9 @@ public class CadastrarAlunoBean {
 	}
 	
 	public List<Aluno> getAlunos() {
-		return alunoService.listar();
+		if(alunos == null) {
+			alunos = alunoService.listar();
+		}
+		return alunos;
 	}
 }
