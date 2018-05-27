@@ -9,100 +9,93 @@
 <ui:composition template="_template.xhtml">
 	<ui:define name="titulo">Cadastro de aluno</ui:define>
 	<ui:define name="conteudo">
-		<h:form>
-			<h:messages/>
+		<h:form id="formNovoAluno">
+			<p:messages globalOnly="true"/>
 			<fieldset>
 				<legend>Novo aluno</legend>
 				<h:panelGrid columns="2">
-					<h:outputLabel value="Nome" for="nome"/>
+					<p:outputLabel value="Nome" for="nome"/>
 					<h:panelGroup>
-						<h:inputText id="nome" value="#{cadastrarAlunoBean.aluno.nome}" 
+						<p:inputText id="nome" value="#{cadastrarAlunoBean.aluno.nome}" 
 							required="true" requiredMessage="O nome do aluno é obrigatório">
-							<f:ajax execute="nome" event="blur" render="messagemAluno"/>
-						</h:inputText>
-						<h:message for="nome" id="messagemAluno"/>
+							<p:ajax process="nome" event="blur" update="messagemAluno"/>
+						</p:inputText>
+						<p:message for="nome" id="messagemAluno"/>
 					</h:panelGroup>
 					
-					<h:outputLabel value="Telefone" for="telefone"/>
-					<h:inputText id="telefone" value="#{cadastrarAlunoBean.aluno.telefone}">
-						<f:validateLength maximum="10" />
-					</h:inputText>
+					<p:outputLabel value="Telefone" for="telefone"/>
+					<p:inputText id="telefone" value="#{cadastrarAlunoBean.aluno.telefone}" maxlength="10"/>
 					
-					<h:outputLabel value="Data nascimento" for="dataNascimento"/>
-					<h:inputText id="dataNascimento" value="#{cadastrarAlunoBean.aluno.dataNascimento.time}">
+					<p:outputLabel value="Data nascimento" for="dataNascimento"/>
+					<p:inputText id="dataNascimento" value="#{cadastrarAlunoBean.aluno.dataNascimento.time}">
 						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
-					</h:inputText>
+					</p:inputText>
 					
-					<h:outputLabel value="Email" for="email"/>
-					<h:inputText id="email" value="#{cadastrarAlunoBean.aluno.email}"
+					<p:outputLabel value="Email" for="email"/>
+					<p:inputText id="email" value="#{cadastrarAlunoBean.aluno.email}"
 						validator="emailValidator"/>
 				</h:panelGrid>
 			</fieldset>
 			
 			<fieldset>
 				<legend>Adicionar curso</legend>
-				<h:outputLabel value="Curso" for="curso"/>
-				<h:selectOneMenu id="curso" value="#{cadastrarAlunoBean.idCurso}">
+				<p:outputLabel value="Curso" for="curso"/>
+				<p:selectOneMenu id="curso" value="#{cadastrarAlunoBean.idCurso}">
 					<f:selectItems value="#{cadastrarAlunoBean.cursos}" var="curso" 
 						itemLabel="#{curso.nome}" itemValue="#{curso.id}"/>
-				</h:selectOneMenu>
+				</p:selectOneMenu>
 				
-				<h:commandButton value="Salvar" action="#{cadastrarAlunoBean.adicionarCurso}">
-					<f:ajax execute="curso" render="cursosDoAluno"/>
-				</h:commandButton>
+				<p:commandButton value="Salvar" action="#{cadastrarAlunoBean.adicionarCurso}"
+					process="@this curso" update="cursosDoAluno"/>
 				
 				<br/>
-				<h:commandLink value="Cadastrar Novo Curso" action="#{cadastrarAlunoBean.cadastrarNovoCurso}" 
+				<p:commandLink value="Cadastrar Novo Curso" action="#{cadastrarAlunoBean.cadastrarNovoCurso}" 
 					immediate="true"/>
 				
-				<h:dataTable id="cursosDoAluno" value="#{cadastrarAlunoBean.aluno.cursos}" var="curso">
-					<h:column>
-						<h:outputText value="#{curso.nome}"/>
-					</h:column>
-					removerCursoDoAluno
-					<h:column>
-						<h:commandLink value="X" action="#{cadastrarAlunoBean.removerCursoDoAluno(curso)}"/>
-					</h:column>
-				</h:dataTable>
+				<p:dataList id="cursosDoAluno" value="#{cadastrarAlunoBean.aluno.cursos}" var="curso"
+					type="unordered" itemType="none">
+					<f:facet name="header">Cursos atribuidos</f:facet>
+					<p:commandLink value=" Excluir" action="#{cadastrarAlunoBean.removerCursoDoAluno(curso)}"
+						update="cursosDoAluno"
+						styleClass="ui-icon ui-icon-trash" style="float:left; margin-right:10px"/>
+					<h:outputText value="#{curso.nome}" style="display:inline-block"/>
+				</p:dataList>
 			</fieldset>
 			
 			<p:commandButton value="Salvar" action="#{cadastrarAlunoBean.salvar}"
-				process="@form" update="@form :formListarAlunos:alunos">
-			</p:commandButton>
+				process="@form" update="@form :formListarAlunos:alunos"/>
 		</h:form>
 		
 		<h:form id="formListarAlunos">
 			<fieldset>
 				<legend>Alunos</legend>
-				<h:dataTable id="alunos" value="#{cadastrarAlunoBean.alunos}" var="aluno" cellspacing="5">
-					<h:column>
-						<f:facet name="header">Nome</f:facet>
+				<p:dataTable id="alunos" value="#{cadastrarAlunoBean.alunos}" var="aluno" cellspacing="5">
+					<p:column headerText="Nome">
 						<h:outputText value="#{aluno.nome}"/>
-					</h:column>
+					</p:column>
 					
-					<h:column>
-						<f:facet name="header">Idade</f:facet>
+					<p:column headerText="Idade">
 						<h:outputText value="#{aluno.idade}"/>
-					</h:column>
+					</p:column>
 					
-					<h:column>
-						<f:facet name="header">Telefone</f:facet>
+					<p:column headerText="Telefone">
 						<h:outputText value="#{aluno.telefone}"/>
-					</h:column>
+					</p:column>
 					
-					<h:column>
-						<f:facet name="header">E-mail</f:facet>
+					<p:column headerText="E-mail">
 						<h:outputText value="#{aluno.email}"/>
-					</h:column>
+					</p:column>
 					
-					<h:column>
-						<h:commandLink value="Remover" action="#{cadastrarAlunoBean.remover(aluno)}"/>
-					</h:column>
+					<p:column>
+						<p:commandLink value="Remover" action="#{cadastrarAlunoBean.remover(aluno)}"
+							update="@form"/>
+					</p:column>
 					
-					<h:column>
-						<h:commandLink value="Alterar" action="#{cadastrarAlunoBean.preparaAlteracao(aluno)}"/>
-					</h:column>
-				</h:dataTable>
+					<p:column>
+						<p:commandLink value="Alterar" action="#{cadastrarAlunoBean.preparaAlteracao(aluno)}"
+							update=":formNovoAluno"/>
+					</p:column>
+				</p:dataTable>
 			</fieldset>
 		</h:form>
 	</ui:define>
