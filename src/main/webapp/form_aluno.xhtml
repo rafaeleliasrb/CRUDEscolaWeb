@@ -24,12 +24,13 @@
 					</h:panelGroup>
 					
 					<p:outputLabel value="Telefone" for="telefone"/>
-					<p:inputText id="telefone" value="#{cadastrarAlunoBean.aluno.telefone}" maxlength="10"/>
+					<p:inputMask id="telefone" value="#{cadastrarAlunoBean.aluno.telefone}" 
+						mask="(99) 99999-9999"
+						maxlength="15"/>
 					
 					<p:outputLabel value="Data nascimento" for="dataNascimento"/>
-					<p:inputText id="dataNascimento" value="#{cadastrarAlunoBean.aluno.dataNascimento.time}">
-						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo"/>
-					</p:inputText>
+					<p:calendar id="dataNascimento" value="#{cadastrarAlunoBean.aluno.dataNascimento.time}" 
+    					pattern="dd/MM/yyyy" timeZone="America/Sao_Paulo" locale="pt_BR" mask="true" />
 					
 					<p:outputLabel value="Email" for="email"/>
 					<p:inputText id="email" value="#{cadastrarAlunoBean.aluno.email}"
