@@ -1,11 +1,15 @@
 package br.com.escola.bean;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+
+import org.primefaces.model.LazyDataModel;
+import org.primefaces.model.SortOrder;
 
 import br.com.escola.model.domain.Aluno;
 import br.com.escola.model.domain.Curso;
@@ -22,6 +26,18 @@ public class CadastrarAlunoBean {
 	private Aluno aluno = new Aluno();
 	private Integer idCurso;
 	private List<Aluno> alunos;
+	private LazyDataModel<Aluno> alunosLazy = new LazyDataModel<Aluno>() {
+
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public List<Aluno> load(int first, int pageSize, String sortField, SortOrder sortOrder,
+				Map<String, Object> filters) {
+			setRowCount(alunoService.contarTodosPaginado(filters));
+			return alunoService.listarTodosPaginado(first, pageSize, sortField, sortOrder, filters);
+		}	
+		
+	};
 	
 	public void salvar() {
 		if(aluno.getCursos().isEmpty()) {
@@ -84,5 +100,9 @@ public class CadastrarAlunoBean {
 			alunos = alunoService.listar();
 		}
 		return alunos;
+	}
+	
+	public LazyDataModel<Aluno> getAlunosLazy() {
+		return alunosLazy;
 	}
 }

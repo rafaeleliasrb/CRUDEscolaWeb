@@ -66,13 +66,13 @@
 		
 		<h:form id="formListarAlunos">
 			<p:fieldset legend="Alunos">
-				<p:dataTable id="alunos" value="#{cadastrarAlunoBean.alunos}" var="aluno" cellspacing="5"
-					paginator="true" rows="5">
+				<p:dataTable id="alunos" value="#{cadastrarAlunoBean.alunosLazy}" var="aluno" cellspacing="5"
+					paginator="true" rows="5" lazy="true">
 					<p:column headerText="Nome" sortBy="#{aluno.nome}" filterBy="#{aluno.nome}">
 						<h:outputText value="#{aluno.nome}"/>
 					</p:column>
 					
-					<p:column headerText="Idade" sortBy="#{aluno.idade}">
+					<p:column headerText="Idade" sortBy="#{aluno.dataNascimento}">
 						<h:outputText value="#{aluno.idade}"/>
 					</p:column>
 					

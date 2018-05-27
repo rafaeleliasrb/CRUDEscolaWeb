@@ -1,6 +1,9 @@
 package br.com.escola.model.service;
 
 import java.util.List;
+import java.util.Map;
+
+import org.primefaces.model.SortOrder;
 
 import br.com.escola.model.dao.AlunoDao;
 import br.com.escola.model.domain.Aluno;
@@ -60,4 +63,12 @@ public class AlunoService {
 		}
 	}
 
+	public List<Aluno> listarTodosPaginado(int inicio, int quantidade, String campoOrdenacao, 
+			SortOrder sentidoOrdenacao, Map<String, Object> filtros) {
+		return dao.listarPaginado(inicio, quantidade, campoOrdenacao, sentidoOrdenacao, filtros);
+	}
+	
+	public Integer contarTodosPaginado(Map<String, Object> filtros) {
+		return dao.contarTodosPaginado(filtros);
+	}
 }
