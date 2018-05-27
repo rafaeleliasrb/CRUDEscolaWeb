@@ -53,12 +53,11 @@
 					immediate="true"/>
 				
 				<p:dataList id="cursosDoAluno" value="#{cadastrarAlunoBean.aluno.cursos}" var="curso"
-					type="unordered" itemType="none">
+					type="definition">
 					<f:facet name="header">Cursos atribuidos</f:facet>
-					<p:commandLink value=" Excluir" action="#{cadastrarAlunoBean.removerCursoDoAluno(curso)}"
-						update="cursosDoAluno"
-						styleClass="ui-icon ui-icon-trash" style="float:left; margin-right:10px"/>
-					<h:outputText value="#{curso.nome}" style="display:inline-block"/>
+					<p:commandButton icon="fa fa-fw fa-remove" action="#{cadastrarAlunoBean.removerCursoDoAluno(curso)}"
+						update="cursosDoAluno"/>
+					<h:outputText value="#{curso.nome}" />
 				</p:dataList>
 			</fieldset>
 			
