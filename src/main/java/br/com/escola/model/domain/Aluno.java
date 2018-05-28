@@ -1,6 +1,8 @@
 package br.com.escola.model.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -9,7 +11,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.PostLoad;
+import javax.persistence.PostPersist;
+import javax.persistence.PostUpdate;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.persistence.Transient;
 
 @SuppressWarnings("serial")
@@ -28,8 +35,12 @@ public class Aluno implements Serializable {
 	private String telefone;
 
 	@ManyToMany
-	private List<Curso> cursos;
+	private List<Curso> cursos = new ArrayList<>();
 	
+	@Temporal(TemporalType.DATE)
+	private Calendar dataNascimento = Calendar.getInstance();
+	
+	@Transient
 	private int idade;
 	
 	private float nota;
@@ -37,10 +48,21 @@ public class Aluno implements Serializable {
 	@Column(name = "ismatriculado")
 	private boolean isMatriculado;
 	
-	
 	@Transient
 	public int getIdInt() {
 		return getId() == null ? 0 : getId();
+	}
+	
+	@PostLoad
+	@PostPersist
+	@PostUpdate
+	private void carregaIdade() {
+        Calendar hoje = Calendar.getInstance();
+        int ajusteParaSaberSeJaFezAniversario = 0;
+        if ( hoje.get(Calendar.DAY_OF_YEAR) - dataNascimento.get(Calendar.DAY_OF_YEAR) < 0) {
+            ajusteParaSaberSeJaFezAniversario = -1;
+        }
+        idade = hoje.get(Calendar.YEAR) - dataNascimento.get(Calendar.YEAR) + ajusteParaSaberSeJaFezAniversario;
 	}
 	
 	public Integer getId() {
@@ -87,10 +109,6 @@ public class Aluno implements Serializable {
 		return idade;
 	}
 
-	public void setIdade(int idade) {
-		this.idade = idade;
-	}
-
 	public float getNota() {
 		return nota;
 	}
@@ -106,4 +124,10 @@ public class Aluno implements Serializable {
 	public void setMatriculado(boolean isMatriculado) {
 		this.isMatriculado = isMatriculado;
 	}
+	
+	public Calendar getDataNascimento() {
+		return dataNascimento;
+	}
+	
+	
 }

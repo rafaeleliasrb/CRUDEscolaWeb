@@ -8,33 +8,79 @@
 <title>Insert title here</title>
 </h:head>
 <h:body>
-	<h:form>
+	<h:form id="formAluno">
+		<h:messages/>
 		<fieldset>
 			<legend>Novo Aluno</legend>
 			<h:panelGrid columns="2">
 				<h:outputLabel value="Nome"></h:outputLabel>
-				<h:inputText value="#{formAlunoBean.aluno.nome}"></h:inputText>
+				<h:panelGroup>
+					<h:inputText id="nome" value="#{formAlunoBean.aluno.nome}" required="true">
+						<f:ajax execute="nome" render="vaidacaoNome" event="blur"/>
+					</h:inputText>
+					<h:message id="vaidacaoNome" for="nome"></h:message>
+				</h:panelGroup>
 				
 				<h:outputLabel value="Email"></h:outputLabel>
-				<h:inputText value="#{formAlunoBean.aluno.email}"></h:inputText>
+				<h:inputText value="#{formAlunoBean.aluno.email}"
+					validator="emailValidator"/>
 				
 				<h:outputLabel value="Telefone"></h:outputLabel>
 				<h:inputText value="#{formAlunoBean.aluno.telefone}"></h:inputText>
 				
-				<h:outputLabel value="Idade"></h:outputLabel>
-				<h:inputText value="#{formAlunoBean.aluno.idade}"></h:inputText>
+				<h:outputLabel value="Data Nascimento"></h:outputLabel>
+				<h:inputText value="#{formAlunoBean.aluno.dataNascimento.time}">
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="America/Fortaleza" />
+				</h:inputText>
 			</h:panelGrid>
 		</fieldset>
 		
 		<fieldset>
 			<legend>Novo Curso</legend>
-			<h:selectOneMenu value="#{formAlunoBean.cursoId}">
+			<h:selectOneMenu id="curso" value="#{formAlunoBean.cursoId}">
 				<f:selectItems value="#{formAlunoBean.cursos}" var="curso"
 					itemLabel="#{curso.nome}" itemValue="#{curso.id}"></f:selectItems>
 			</h:selectOneMenu>
+			
+			<h:commandButton value="Adicionar Curso ao Aluno"
+				action="#{formAlunoBean.adicionarCurso}">
+				<f:ajax execute="curso" render="cursosDoAluno"></f:ajax>
+			</h:commandButton>
+			
+			<h:commandLink value="Cadastrar Novo Curso" action="#{formAlunoBean.cadastrarNovoCurso}"></h:commandLink>
+			
+			<h:dataTable id="cursosDoAluno" value="#{formAlunoBean.aluno.cursos}" var="curso">
+				<h:column>
+					<h:outputText value="#{curso.nome}"/>
+				</h:column>
+			</h:dataTable>
 		</fieldset>
 		
-		<h:commandButton value="Gravar" action="#{formAlunoBean.gravar}"></h:commandButton>
+		<h:commandButton value="Gravar" action="#{formAlunoBean.gravar}">
+			<f:ajax execute="@form" render="@form :alunos"></f:ajax>
+		</h:commandButton>
 	</h:form>
+	
+	<h:dataTable id="alunos" value="#{formAlunoBean.alunos}" var="aluno" cellspacing="5">
+		<h:column>
+			<f:facet name="header">Nome</f:facet>
+			<h:outputText value="#{aluno.nome}"/>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Idade</f:facet>
+			<h:outputText value="#{aluno.idade}"/>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">Telefone</f:facet>
+			<h:outputText value="#{aluno.telefone}"/>
+		</h:column>
+		
+		<h:column>
+			<f:facet name="header">E-mail</f:facet>
+			<h:outputText value="#{aluno.email}"/>
+		</h:column>
+	</h:dataTable>
 </h:body>
 </html>
