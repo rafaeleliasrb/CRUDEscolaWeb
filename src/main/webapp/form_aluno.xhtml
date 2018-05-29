@@ -10,13 +10,14 @@
 	<ui:param name="titulo" value="Cadastro de aluno" />
 	<ui:define name="conteudo">
 		<h:form id="formNovoAluno">
-			<p:messages globalOnly="true"/>
+			<p:messages/>
 			<p:fieldset legend="Novo aluno">
 				<h:panelGrid columns="2">
 					<p:outputLabel value="Nome" for="nome"/>
 					<h:panelGroup>
 						<p:inputText id="nome" value="#{cadastrarAlunoBean.aluno.nome}" 
-							required="true" requiredMessage="O nome do aluno é obrigatório">
+							required="true" requiredMessage="O nome do aluno é obrigatório"
+							placeholder="Nome do alumo">
 							<p:ajax process="nome" event="blur" update="messagemAluno"/>
 						</p:inputText>
 						<p:message for="nome" id="messagemAluno"/>
@@ -55,7 +56,7 @@
 					type="definition">
 					<f:facet name="header">Cursos atribuidos</f:facet>
 					<p:commandButton icon="fa fa-fw fa-remove" action="#{cadastrarAlunoBean.removerCursoDoAluno(curso)}"
-						update="cursosDoAluno"/>
+						update="cursosDoAluno" process="@this"/>
 					<h:outputText value="#{curso.nome}" />
 				</p:dataList>
 			</p:fieldset>
