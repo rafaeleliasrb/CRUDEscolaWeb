@@ -3,21 +3,21 @@ package br.com.escola.model.dao;
 import java.util.List;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+
+import org.springframework.stereotype.Repository;
 
 import br.com.escola.model.domain.Curso;
-import br.com.escola.model.repository.ConnectionFactory;
 
+@Repository
 public class CursoDao {
 
+	@PersistenceContext(unitName="maindatabase")
 	private EntityManager em;
 
-	public CursoDao() {
-		this.em = ConnectionFactory.getInstance().getEntityManager();
-	}
-	
 	@SuppressWarnings("unchecked")
 	public List<Curso> listar() {		
-		return this.em
+		return em
 		        .createQuery("select t from Curso as t")
 		        .getResultList();
 	}

@@ -9,4 +9,12 @@
         <phase-listener>br.com.escola.util.PhaseListenerLog</phase-listener>
     </lifecycle>
     
+    <application>
+		<locale-config>
+			<default-locale>pt_BR</default-locale>
+			<supported-locale>pt_BR</supported-locale>
+		</locale-config>
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+	</application>
+    
 </faces-config>

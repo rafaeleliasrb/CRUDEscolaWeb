@@ -4,22 +4,21 @@ import java.util.List;
 import java.util.Map;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import org.primefaces.model.SortOrder;
+import org.springframework.stereotype.Repository;
 
 import br.com.escola.model.domain.Aluno;
 import br.com.escola.model.domain.TipoSelect;
-import br.com.escola.model.repository.ConnectionFactory;
 
+@Repository
 public class AlunoDao {
 
+	@PersistenceContext
 	private EntityManager em;
 
-	public AlunoDao() {
-		this.em = ConnectionFactory.getInstance().getEntityManager();
-	}
-	
 	@SuppressWarnings("unchecked")
 	public List<Aluno> listar() {		
 		return this.em
@@ -31,6 +30,13 @@ public class AlunoDao {
 		return this.em.find(Aluno.class, idParam);
 	}
 	
+	public Aluno buscarComCursos(int idParam) {
+		return em
+		        .createQuery("select t from Aluno as t join fecth t.cursos c where t.id = :id", Aluno.class)
+		        .setParameter("id", idParam)
+		        .getSingleResult();
+	}
+	
 	@SuppressWarnings("unchecked")
 	public List<Aluno> buscar(String nomeParam) {
 		return this.em
@@ -39,24 +45,18 @@ public class AlunoDao {
 	}
 	
 	public void inserir(Aluno aluno) {
-		this.em.getTransaction().begin();        
 		this.em.persist(aluno);
-		this.em.getTransaction().commit();
 	}
 	
 	public void alterar(Aluno aluno) {
-		this.em.getTransaction().begin();        
 		this.em.merge(aluno);
-		this.em.getTransaction().commit();
 	}
 	
 	public void remover(int id) throws Exception {
 		Aluno aluno = buscar(id);
 		
 		if(aluno != null) {
-			this.em.getTransaction().begin();        
 			this.em.remove(aluno);
-			this.em.getTransaction().commit();
 		} else {
 			throw new Exception("O aluno de ID = " + id + " não existe no banco");
 		}
@@ -81,7 +81,6 @@ public class AlunoDao {
 		StringBuilder sql = selectFrom(select);
 		where(filtros, sql);
 		orderBy(select, campoOrdenacao, sentidoOrdenacao, sql);
-		System.out.println("Query: " + sql.toString());
 		return criaQueryESetaParametros(filtros, sql);
 	}
 

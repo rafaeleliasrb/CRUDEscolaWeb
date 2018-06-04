@@ -92,7 +92,7 @@
 					
 					<p:column>
 						<p:commandLink value="Alterar" action="#{cadastrarAlunoBean.preparaAlteracao(aluno)}"
-							update=":formNovoAluno"/>
+							update=":formNovoAluno" process="@this"/>
 					</p:column>
 				</p:dataTable>
 			</p:fieldset>

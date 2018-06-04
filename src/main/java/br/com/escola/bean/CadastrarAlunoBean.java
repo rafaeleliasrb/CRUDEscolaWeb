@@ -1,31 +1,39 @@
 package br.com.escola.bean;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
+import br.com.escola.model.dao.AlunoDao;
 import br.com.escola.model.domain.Aluno;
 import br.com.escola.model.domain.Curso;
 import br.com.escola.model.service.AlunoService;
 import br.com.escola.model.service.CursoService;
 
-@ViewScoped
-@ManagedBean
-public class CadastrarAlunoBean {
+@Scope("view")
+@Controller
+public class CadastrarAlunoBean implements Serializable {
 
-	private AlunoService alunoService = new AlunoService();
-	private CursoService cursoService = new CursoService();
+	private static final long serialVersionUID = 1L;
+	
+	@Autowired
+	private AlunoService alunoService;
+	@Autowired
+	private CursoService cursoService;
 	
 	private Aluno aluno = new Aluno();
 	private Integer idCurso;
 	private List<Aluno> alunos;
+	private List<Curso> cursos;
 	private LazyDataModel<Aluno> alunosLazy = new LazyDataModel<Aluno>() {
 
 		private static final long serialVersionUID = 1L;
@@ -45,6 +53,7 @@ public class CadastrarAlunoBean {
             return;
 		}
 		alunoService.salvar(aluno);
+		FacesContext.getCurrentInstance().addMessage(null,  new FacesMessage("Aluno salvo com sucesso"));
 		
 		alunos = alunoService.listar();
 		aluno = new Aluno();
@@ -68,6 +77,8 @@ public class CadastrarAlunoBean {
 	public void preparaAlteracao(Aluno aluno) {
 		System.out.println("Carregando aluno de id: " + aluno.getId() + " para alterar");
 		this.aluno = aluno;
+		//this.aluno = alunoService.buscar(aluno.getId());
+		//this.aluno.getCursos();
 	}
 	
 	public void removerCursoDoAluno(Curso curso) {
@@ -84,7 +95,10 @@ public class CadastrarAlunoBean {
 	}
 	
 	public List<Curso> getCursos() {
-		return cursoService.listar();
+		if(cursos == null) {
+			cursos = cursoService.listar();
+		}
+		return cursos;
 	}
 
 	public Integer getIdCurso() {

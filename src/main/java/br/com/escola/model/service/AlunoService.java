@@ -4,32 +4,20 @@ import java.util.List;
 import java.util.Map;
 
 import org.primefaces.model.SortOrder;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import br.com.escola.model.dao.AlunoDao;
 import br.com.escola.model.domain.Aluno;
 
+@Service
 public class AlunoService {
 	
-	private AlunoDao dao = new AlunoDao();
+	@Autowired
+	private AlunoDao dao;
 	
-	public AlunoService() {
-//		popularBanco();
-	}
-	
-//	private void popularBanco() {
-//		Aluno aluno = new Aluno();
-//		aluno.setId(0);
-//		aluno.setNome("Yuri");
-//		aluno.setEmail("yuri@gmail.com");
-//		aluno.setTelefone("85999999999");
-//		aluno.setCurso("Java para Web");
-//		aluno.setIdade(28);
-//		aluno.setNota(9.5f);
-//		aluno.setMatriculado(true);
-//		
-//		salvar(aluno);
-//	}
-	
+	@Transactional
 	public void salvar(Aluno aluno) {
 		if(aluno != null) {
 			if(aluno.getIdInt() > 0) {
@@ -46,6 +34,10 @@ public class AlunoService {
 
 	public Aluno buscar(int id) {
 		return this.dao.buscar(id);
+	}
+	
+	public Aluno buscarComCursos(int id) {
+		return this.dao.buscarComCursos(id);
 	}
 	
 	public List<Aluno> buscar(String nome) {

@@ -1,12 +1,13 @@
 package br.com.escola.model.domain;
 
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 public class Pessoa {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 	
 	private String nome;

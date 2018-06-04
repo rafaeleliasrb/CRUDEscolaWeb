@@ -11,6 +11,9 @@
   <properties>
   		<hibernate.version>5.1.14.Final</hibernate.version>
   		<jsf.version>2.2.6</jsf.version>
+  		<spring.version>4.0.0.RELEASE</spring.version>
+		<spring.security.version>4.0.0.RELEASE</spring.security.version>
+		<org.aspectj.version>1.6.12</org.aspectj.version>
   
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -20,9 +23,9 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.primefaces</groupId>
-			<artifactId>primefaces</artifactId>
-			<version>6.2</version>
+		    <groupId>org.jboss.logging</groupId>
+		    <artifactId>jboss-logging</artifactId>
+		    <version>3.3.0.Final</version>
 		</dependency>
 
 		<dependency>
@@ -38,15 +41,27 @@
 		</dependency>
 
 		<dependency>
-		    <groupId>org.jboss.logging</groupId>
-		    <artifactId>jboss-logging</artifactId>
-		    <version>3.3.0.Final</version>
-		</dependency>
-
-		<dependency>
 		    <groupId>mysql</groupId>
 		    <artifactId>mysql-connector-java</artifactId>
 		    <version>5.1.46</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-c3p0</artifactId>
+			<version>${hibernate.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.mchange</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.9.5.2</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>6.2</version>
 		</dependency>
 
 		<dependency>
@@ -69,12 +84,104 @@
 		</dependency>
 
 		<dependency>
+			<groupId>javax.el</groupId>
+			<artifactId>javax.el-api</artifactId>
+			<version>2.2.4</version>
+			<scope>provided</scope>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-core</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-beans</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-aop</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-tx</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-orm</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjrt</artifactId>
+			<version>${org.aspectj.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.aspectj</groupId>
+			<artifactId>aspectjweaver</artifactId>
+			<version>${org.aspectj.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.12</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
+	
 	<build>
 		<finalName>CRUDEscolaWeb</finalName>
 		<pluginManagement>

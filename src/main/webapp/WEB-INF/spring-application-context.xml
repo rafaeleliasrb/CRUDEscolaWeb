@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+						http://www.springframework.org/schema/tx 
+						http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+						http://www.springframework.org/schema/context 
+						http://www.springframework.org/schema/context/spring-context-4.0.xsd
+						http://www.springframework.org/schema/aop 
+  						http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+  						http://www.springframework.org/schema/task 
+  						http://www.springframework.org/schema/task/spring-task-4.0.xsd">
+
+	<context:property-placeholder location="classpath:application.properties" />
+
+	<context:annotation-config />
+	<context:component-scan base-package="br.com.escola" scope-resolver="br.com.escola.util.CDIScopeMetadataResolver" />
+	
+	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
+	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${database.driver}"/>
+        <property name="jdbcUrl" value="${database.url}"/>
+        <property name="user" value="${database.username}"/>
+        <property name="password" value="${database.password}"/>
+        
+        <property name="acquireIncrement" value="${database.acquireIncrement}" />
+		<property name="initialPoolSize" value="${database.initialPoolSize}" />
+		<property name="minPoolSize" value="${database.minPoolSize}" />
+		<property name="maxPoolSize" value="${database.maxPoolSize}" />
+		<property name="maxConnectionAge" value="${database.maxConnectionAge}" />
+		<property name="maxIdleTime" value="${database.maxIdleTime}" />
+		<property name="maxIdleTimeExcessConnections" value="${database.maxIdleTimeExcessConnections}" />
+		<property name="testConnectionOnCheckout" value="${database.testConnectionOnCheckout}" />
+    </bean>
+    
+    <bean id="emf" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="maindatabase" />
+		<property name="dataSource" ref="dataSource" />
+		<property name="jpaVendorAdapter">
+			<bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+				<property name="databasePlatform" value="${database.target}" />
+				<property name="showSql" value="${database.showSql}" />
+				<property name="generateDdl" value="${database.generateDdl}" />
+			</bean>
+		</property>
+		<property name="packagesToScan">
+			<list>
+				<value>br.com.escola.model.domain</value>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="emf" />
+	</bean>
+
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<tx:attributes>
+			<tx:method name="find*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="get*" propagation="SUPPORTS" read-only="true" />
+			<tx:method name="*" propagation="REQUIRED" rollback-for="Exception"/>
+		</tx:attributes>
+	</tx:advice>
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<aop:config>
+		<aop:pointcut id="serviceMethods"
+			expression="execution(* br.com.escola.model.service..*.*(..))" />
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="serviceMethods" />
+	</aop:config>
+
+	<aop:aspectj-autoproxy proxy-target-class="true"/>
+	
+	<bean class="org.springframework.beans.factory.config.CustomScopeConfigurer">
+		<property name="scopes">
+			<map>
+				<entry key="view">
+					<bean class="br.com.escola.util.ViewScopeSpringSupport" />
+				</entry>
+			</map>
+		</property>
+	</bean>
+</beans>
