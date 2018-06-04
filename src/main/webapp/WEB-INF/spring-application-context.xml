@@ -19,6 +19,8 @@
 	<context:annotation-config />
 	<context:component-scan base-package="br.com.escola" scope-resolver="br.com.escola.util.CDIScopeMetadataResolver" />
 	
+	<task:annotation-driven />
+	
 	<bean class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 	<bean class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 

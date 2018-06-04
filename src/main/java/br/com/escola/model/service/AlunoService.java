@@ -6,7 +6,6 @@ import java.util.Map;
 import org.primefaces.model.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import br.com.escola.model.dao.AlunoDao;
 import br.com.escola.model.domain.Aluno;
@@ -17,7 +16,6 @@ public class AlunoService {
 	@Autowired
 	private AlunoDao dao;
 	
-	@Transactional
 	public void salvar(Aluno aluno) {
 		if(aluno != null) {
 			if(aluno.getIdInt() > 0) {
